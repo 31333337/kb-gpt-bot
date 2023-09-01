@@ -1,5 +1,4 @@
-module github.com/kb-gpt-bot
-
+module github.com/31333337/kb-gpt-bot
 go 1.19
 
 require (
