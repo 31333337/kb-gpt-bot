@@ -1,4 +1,4 @@
-module github.com/31333337/kb-gpt-bot/commands
+module github.com/31333337/kb-gpt-bot/pkg/commands
 
 go 1.19
 
