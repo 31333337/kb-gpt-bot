@@ -1,15 +1,15 @@
 package commands
 
 import (
+	"fmt"
 	"github.com/keybase/go-keybase-chat-bot/kbchat"
 )
 
-func HandleInfoCommand(api *kbchat.API, channel *kbchat.Channel) error {
-	// Your logic for displaying the bot info
-	// ...
-
-	// Send a response message to the user
-	_, err := api.SendMessage(channel, "Bot Info: ...") // Replace "..." with actual information
-	return err
+func HandleInfo(api *kbchat.API, msg kbchat.SubscriptionMessage) error {
+	resp := "Bot Info:\n- Version: 1.0\n- Commands: /role, /temperature, /settings, /info, /config"
+	if _, err := api.SendMessageByConvID(msg.Conversation.Id, resp); err != nil {
+		return err
+	}
+	return nil
 }
 

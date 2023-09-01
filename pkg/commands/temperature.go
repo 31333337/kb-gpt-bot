@@ -1,15 +1,16 @@
 package commands
 
 import (
+	"fmt"
 	"github.com/keybase/go-keybase-chat-bot/kbchat"
 )
 
-func HandleTemperatureCommand(api *kbchat.API, channel *kbchat.Channel, temperature float64) error {
-	// Your logic for setting the temperature
-	// ...
-
-	// Send a response message to the user
-	_, err := api.SendMessage(channel, "Temperature set to: "+string(temperature))
-	return err
+func HandleTemperature(api *kbchat.API, msg kbchat.SubscriptionMessage, temp float64) error {
+	// Here, handle the 'temperature' change logic.
+	resp := fmt.Sprintf("Temperature changed to: %f", temp)
+	if _, err := api.SendMessageByConvID(msg.Conversation.Id, resp); err != nil {
+		return err
+	}
+	return nil
 }
 

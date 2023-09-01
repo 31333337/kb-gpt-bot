@@ -1,15 +1,19 @@
 package commands
 
 import (
+	"fmt"
 	"github.com/keybase/go-keybase-chat-bot/kbchat"
 )
 
-func HandleSettingsCommand(api *kbchat.API, channel *kbchat.Channel) error {
-	// Your logic for fetching and displaying the settings
-	// ...
-
-	// Send a response message to the user
-	_, err := api.SendMessage(channel, "Current settings: ...") // Replace "..." with actual settings
-	return err
+func HandleSettings(api *kbchat.API, msg kbchat.SubscriptionMessage, settings map[string]string) error {
+	// Here, handle the 'settings' change logic.
+	resp := "Settings updated."
+	for key, value := range settings {
+		resp += fmt.Sprintf("\n- %s: %s", key, value)
+	}
+	if _, err := api.SendMessageByConvID(msg.Conversation.Id, resp); err != nil {
+		return err
+	}
+	return nil
 }
 

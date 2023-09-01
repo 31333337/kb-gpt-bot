@@ -1,17 +1,15 @@
 package commands
 
 import (
-	"strings"
-
 	"github.com/keybase/go-keybase-chat-bot/kbchat"
 )
 
-func HandleRoleCommand(api *kbchat.API, channel *kbchat.Channel, role string) error {
-	// Your logic for setting the role
-	// ...
-
-	// Send a response message to the user
-	_, err := api.SendMessage(channel, "Role set to: "+strings.ToUpper(role))
-	return err
+func HandleRole(api *kbchat.API, msg kbchat.SubscriptionMessage, role string) error {
+	// Here, handle the 'role' change logic.
+	resp := fmt.Sprintf("Role changed to: %s", role)
+	if _, err := api.SendMessageByConvID(msg.Conversation.Id, resp); err != nil {
+		return err
+	}
+	return nil
 }
 
